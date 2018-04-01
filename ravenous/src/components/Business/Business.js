@@ -1,40 +1,27 @@
-//Imports
+//  Imports
 import React from 'react';
 import './Business.css';
 
-//['business'(Object)]; will be replaced with information from the Yelp API
-//data object.
-const business = {
-  imageSrc: 'https://s3.amazonaws.com/codecademy-content/programs/react/ravenous/pizza.jpg',
-  name: 'MarginOtto Pizzeria',
-  address: '1010 Paddington Way',
-  city: 'Flavortown',
-  state: 'NY',
-  zipCode: '10101',
-  category: 'Italian',
-  rating: 4.5,
-  reviewCount: 90
-}
-
-//['React'(Component)] <Business />
+// Create <Business /> ['React'(Component)]
 class Business extends React.Component {
   render() {
-    return (
+    const bizProps= this.props.business; // capture ['business'(Props-Object)]
+    return ( // Create Business Listing.
       <div className="Business">
         <div className="image-container">
-          <img src={business.imageSrc} alt={business.name}/>
+          <img src={bizProps.imageSrc} alt=''/>
         </div>
-        <h2>{business.name}</h2>
+        <h2>{bizProps.name}</h2>
         <div className="Business-information">
           <div className="Business-address">
-            <p>{business.address}</p>
-            <p>{business.city}</p>
-            <p>{`${business.state} ${business.zipCode}`}</p>
+            <p>{bizProps.address}</p>
+            <p>{bizProps.city}</p>
+            <p>{`${bizProps.state} ${bizProps.zipCode}`}</p>
           </div>
           <div className="Business-reviews">
-            <h3>{business.category.toUpperCase()}</h3>
-            <h3 className="rating">{`${business.rating} stars`}</h3>
-            <p>{`${business.reviewCount} reviews`}</p>
+            <h3>{bizProps.category.toUpperCase()}</h3>
+            <h3 className="rating">{`${bizProps.rating} stars`}</h3>
+            <p>{`${bizProps.reviewCount} reviews`}</p>
           </div>
         </div>
       </div>
@@ -42,4 +29,5 @@ class Business extends React.Component {
   }
 }
 
-export default Business; //export <Business />
+// Exports
+export default Business; // <Business />
