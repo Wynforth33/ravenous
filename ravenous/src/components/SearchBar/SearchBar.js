@@ -13,9 +13,9 @@ class SearchBar extends React.Component {
       sortBy: 'best_match'
     };
 
+    // Functions Bound to Parent.
     this.handleTermChange = this.handleTermChange.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
-    this.handleSortByChange = this.handleSortByChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
 
     // Yelp API sort_by options
@@ -26,6 +26,8 @@ class SearchBar extends React.Component {
     };
   }
 
+  // Checks current sortBy state if it equals the sortByOption, it adds Class
+  // 'active'; which highlights element on front end.
   getSortByClass(sortByOption) {
     if (this.state.sortBy === sortByOption) {
       return 'active';
@@ -34,8 +36,8 @@ class SearchBar extends React.Component {
     }
   }
 
-  handleSortByChange(e) {
-    this.setState({sortBy: e.target.value});
+  handleSortByChange(sortByOption) {
+    this.setState({sortBy: sortByOption});
   }
 
   handleTermChange(e){
@@ -54,9 +56,13 @@ class SearchBar extends React.Component {
   renderSortByOptions() {
     return Object.keys(this.sortByOptions).map(sortByOption => {
       let sortByOptionValue = this.sortByOptions[sortByOption];
-      return (<li className={this.getSortByClass(sortByOptionValue)}
-                  key={sortByOptionValue}
-                  onClick={this.handleSortByChange}>
+      return (<li key={sortByOptionValue}
+                  // set class to 'active' if it
+                  // is the last link item clicked on
+                  className={this.getSortByClass(sortByOptionValue)}
+                  //Binds this, to handleSortByChange,
+                  // but also binds sortByOptionValue, to this function.
+                  onClick={this.handleSortByChange.bind(this, sortByOptionValue)}>
                 {sortByOption}
              </li>);
     });
@@ -71,7 +77,7 @@ class SearchBar extends React.Component {
           </ul>
         </div>
         <div className="SearchBar-fields">
-          <input
+          <input 
             onChange={this.handleTermChange}
             placeholder="Search Businesses" />
           <input
