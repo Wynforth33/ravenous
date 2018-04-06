@@ -11,7 +11,7 @@ class BusinessList extends React.Component {
         { //Function Creates a Business Instance for Each 'Business' in 'Businesses'
           //The sets a props key to the ['business'(Object)] for <Business /> to use.
           this.props.businesses.map(business => {
-            return <Business business={business} />
+            return <Business key={business.id} business={business} />
           })
         }
       </div>
